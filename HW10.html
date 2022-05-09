@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    function bind(fn, context, ...bindArgs) {
+
+    return function () {
+
+      const args = bindArgs.concat(Array.from(arguments));
+
+      return fn.apply(context, args);
+      
+      }
+    }
+
+    const obj1 = {
+      x: 5
+    }
+
+    function getSum(...args) {
+      console.log(...args, this); 
+    }
+
+    const bindF = bind(getSum, obj1, 'bindArg1', 'bindArg2');
+
+    bindF('arg1');
+
+  </script>
+</body>
+</html>
